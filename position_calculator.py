@@ -1,21 +1,43 @@
 from robot import Robot
 
-grid_x = 0
-grid_y = 0
-
 def position_calculator(input_list):
-    raise NotImplementedError("position_calculator")
+
+    output_list = []
+    grid_x, grid_y = process_grid_line(input_list[0])
+    input_list.pop(0)
+
+    for item in input_list:
+        robot = process_robot_line(item, grid_x, grid_y)
+        output_list.push(robot.print_status())
+
+    return output_list
 
 def process_grid_line(grid_line):
-    raise NotImplementedError("process_grid_details")
+    grid_ouput = grid_line.split(" ")
+    return int(grid_ouput[0]), int(grid_ouput[1])
 
-def process_robot_line(robot_line):
-    raise NotImplementedError("process_grid_details")
+def process_robot_line(robot_line, grid_x, grid_y):
+    robot_details, robot_actions = robot_line.split(")")
+    formatted_robot_details = robot_details.strip("(")
+    robot = process_robot_details(formatted_robot_details, grid_x, grid_y)
+    process_robot_actions(robot, robot_actions)
+    return robot
 
-def process_robot_details(robot_details):
-    raise NotImplementedError("process_grid_details")
-    # return Robot()
+def process_robot_details(robot_details, grid_x, grid_y):
+    properties = robot_details.split(',')
+    return Robot(int(properties[0]), int(properties[1]), properties[2], grid_x, grid_y)
 
 def process_robot_actions(robot, robot_actions):
-    raise NotImplementedError("process_grid_details")
-    # return Robot()
+    action_list = list(robot_actions)
+    print(action_list)
+    for action in action_list:
+        if action == 'L':
+            robot.turn_left()
+            print('L')
+        if action == 'R':
+            robot.turn_right()
+            print('R')
+        if action == 'F':
+            robot.move_forward()
+            print('F')
+    return robot
