@@ -37,3 +37,14 @@ def process_robot_actions(robot, robot_actions):
         elif action == 'F':
             robot.move_forward()
     return robot
+
+if __name__ == "__main__":
+    input = ["4 8",
+        "(2, 3, E) LFRFF",
+        "(0, 2, N) FFLFRFF"]
+
+
+    output_list = position_calculator(input)
+
+    for item in output_list:
+        print(item)
