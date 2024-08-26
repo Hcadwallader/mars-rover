@@ -8,7 +8,7 @@ def position_calculator(input_list):
 
     for item in input_list:
         robot = process_robot_line(item, grid_x, grid_y)
-        output_list.push(robot.print_status())
+        output_list.append(robot.print_status())
 
     return output_list
 
@@ -29,15 +29,11 @@ def process_robot_details(robot_details, grid_x, grid_y):
 
 def process_robot_actions(robot, robot_actions):
     action_list = list(robot_actions)
-    print(action_list)
     for action in action_list:
         if action == 'L':
             robot.turn_left()
-            print('L')
-        if action == 'R':
+        elif action == 'R':
             robot.turn_right()
-            print('R')
-        if action == 'F':
+        elif action == 'F':
             robot.move_forward()
-            print('F')
     return robot

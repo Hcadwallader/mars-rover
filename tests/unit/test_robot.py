@@ -50,24 +50,24 @@ class TestRobot():
         assert r.direction == 'E'
 
     def test_move_forward_facing_west_decreases_x(self):
-        r = Robot(3,3,'W',2,2)
+        r = Robot(2,2,'W',2,2)
+        r.move_forward()
+        assert r.x == 1
+        assert r.y == 2
+        assert r.direction == 'W'
+
+    def test_move_forward_facing_north_increases_y(self):
+        r = Robot(2,2,'N',3,3)
         r.move_forward()
         assert r.x == 2
         assert r.y == 3
-        assert r.direction == 'W'
-
-    def test_move_forward_facing_north_decreases_y(self):
-        r = Robot(3,3,'N',2,2)
-        r.move_forward()
-        assert r.x == 3
-        assert r.y == 2
         assert r.direction == 'N'
 
-    def test_move_forward_facing_south_increases_y(self):
-        r = Robot(3,3,'S',2,2)
+    def test_move_forward_facing_south_decreases_y(self):
+        r = Robot(1,1,'S',2,2)
         r.move_forward()
-        assert r.x == 3
-        assert r.y == 4
+        assert r.x == 1
+        assert r.y == 0
         assert r.direction == 'S'
 
     def test_move_forward_facing_east_gets_lost(self):
@@ -87,18 +87,18 @@ class TestRobot():
         assert r.lost == True
 
     def test_move_forward_facing_north_gets_lost(self):
-        r = Robot(0,0,'N',2,2)
+        r = Robot(2,2,'N',2,2)
         r.move_forward()
-        assert r.x == 0
-        assert r.y == 0
+        assert r.x == 2
+        assert r.y == 2
         assert r.direction == 'N'
         assert r.lost == True
 
     def test_move_forward_facing_south_gets_lost(self):
-        r = Robot(3,3,'S',3,3)
+        r = Robot(0,0,'S',3,3)
         r.move_forward()
-        assert r.x == 3
-        assert r.y == 3
+        assert r.x == 0
+        assert r.y == 0
         assert r.direction == 'S'
         assert r.lost == True
 
@@ -107,7 +107,7 @@ class TestRobot():
         assert r.print_status() == '(4, 4, E)'
 
     def test_print_status_robot_lost(self):
-           r = Robot(0,0,'N',2,2)
+           r = Robot(2,2,'N',2,2)
            r.move_forward()
-           assert r.print_status() == '(0, 0, N) LOST'
+           assert r.print_status() == '(2, 2, N) LOST'
 

@@ -25,6 +25,7 @@ class TestPositionCalculator:
 
     def test_process_robot_actions(self):
         robot_mock = Mock()
+        robot_mock.return_value = False
         process_robot_actions(robot_mock, 'LFRFF')
         expected_calls = [call.turn_left(), call.move_forward(), call.turn_right(), call.move_forward(), call.move_forward()]
         robot_mock.assert_has_calls(expected_calls, any_order = False)
